@@ -18,4 +18,112 @@ public interface MiniJVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUnit(MiniJParser.UnitContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#functionDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDeclaration(MiniJParser.FunctionDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#paramList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParamList(MiniJParser.ParamListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#param}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParam(MiniJParser.ParamContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#varDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarDeclaration(MiniJParser.VarDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitType(MiniJParser.TypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock(MiniJParser.BlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatement(MiniJParser.StatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#assignStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignStatement(MiniJParser.AssignStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpr(MiniJParser.ExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#orExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrExpr(MiniJParser.OrExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#andExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAndExpr(MiniJParser.AndExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#equality}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEquality(MiniJParser.EqualityContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#relational}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRelational(MiniJParser.RelationalContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#additive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAdditive(MiniJParser.AdditiveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#multiplicative}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultiplicative(MiniJParser.MultiplicativeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrefix(MiniJParser.PrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostfix(MiniJParser.PostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrimary(MiniJParser.PrimaryContext ctx);
 }

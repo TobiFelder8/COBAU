@@ -1,37 +1,43 @@
 grammar MiniJ;
 
-@header {
-package ch.hslu.cobau.minij;
-}
+@header { package ch.hslu.cobau.minij; }
 
-unit : (functionDeclaration | varDeclaration)* EOF ;
+unit : (recordDeclaration | functionDeclaration | varDeclaration)* EOF ;
 
-functionDeclaration : type ID '(' paramList? ')' block ;
+recordDeclaration : 'record' ID '{' varDeclaration* '}' ;
+
+functionDeclaration : returnType ID '(' paramList? ')' functionBlock ';'? ;
+returnType          : 'void' | nonVoidType ;
 paramList           : param (',' param)* ;
-param               : ('ref')? type ID ;
+param               : ('ref')? nonVoidType ID ;
 
-varDeclaration : type ID ('=' expr)? ';' ;
+varDeclaration : nonVoidType ID ('=' expr)? ';' ;
 
-type : 'int'
-     | 'boolean'
-     | 'string'
-     | 'void'
-     | ID
-     | type '[' ']'
-     ;
+nonVoidType : 'int'
+            | 'boolean'
+            | 'string'
+            | ID
+            | nonVoidType '[' ']'
+            ;
 
-block     : '{' statement* '}' ;
-statement : block
-          | varDeclaration
-          | 'if' '(' expr ')' statement ('else' statement)?
-          | 'while' '(' expr ')' statement
-          | 'return' expr? ';'
-          | assignStatement
-          | expr ';'
-          | ';'
-          ;
+functionBlock : '{' varDeclaration* statementNV* '}' ;
+blockNV       : '{' statementNV* '}' ;
 
-assignStatement : (ID ('[' expr ']')?) '=' expr ';' ;
+statementNV : blockNV
+            | 'if' '(' expr ')' statementNV ('else' statementNV)?
+            | 'while' '(' expr ')' statementNV
+            | 'return' expr? ';'
+            | assignStatement
+            | callStatement
+            | ';'
+            ;
+
+location : ID ('.' ID | '[' expr ']')* ;
+
+assignStatement : location '=' expr ';' ;
+
+callStatement : ID '(' argList? ')' ';' ;
+argList       : expr (',' expr)* ;
 
 expr            : orExpr ;
 orExpr          : andExpr ( '||' andExpr )* ;
@@ -42,12 +48,19 @@ additive        : multiplicative ( ('+' | '-') multiplicative )* ;
 multiplicative  : prefix ( ('*' | '/' | '%') prefix )* ;
 prefix          : ('++' | '--' | '+' | '-' | '!') prefix | postfix ;
 postfix         : primary ( '++' | '--' )? ;
-primary         : INT | BOOL | STRING | ID | '(' expr ')' ;
+
+primary         : INT
+                | BOOL
+                | STRING
+                | ID '(' argList? ')'
+                | location
+                | '(' expr ')'
+                ;
 
 BOOL         : 'true' | 'false' ;
 INT          : [0-9]+ ;
-STRING       : '"' (~["\\] | '\\' .)* '"' ;
-ID           : [a-zA-Z_][a-zA-Z_0-9]* ;
+STRING       : '"' (~["\\] | '\\' . | '$')* '"' ;
+ID           : [a-zA-Z_$][a-zA-Z0-9_$]* ;
 WS           : [ \t\r\n]+ -> skip ;
 LINE_COMMENT : '//' ~[\r\n]* -> skip ;
 BLOCK_COMMENT: '/*' .*? '*/' -> skip ;

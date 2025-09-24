@@ -1,7 +1,5 @@
 // Generated from ch/hslu/cobau/minij/MiniJ.g4 by ANTLR 4.8
-
-package ch.hslu.cobau.minij;
-
+ package ch.hslu.cobau.minij; 
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -30,6 +28,18 @@ public class MiniJBaseListener implements MiniJListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRecordDeclaration(MiniJParser.RecordDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRecordDeclaration(MiniJParser.RecordDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionDeclaration(MiniJParser.FunctionDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -37,6 +47,18 @@ public class MiniJBaseListener implements MiniJListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionDeclaration(MiniJParser.FunctionDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnType(MiniJParser.ReturnTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnType(MiniJParser.ReturnTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -78,37 +100,61 @@ public class MiniJBaseListener implements MiniJListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterType(MiniJParser.TypeContext ctx) { }
+	@Override public void enterNonVoidType(MiniJParser.NonVoidTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitType(MiniJParser.TypeContext ctx) { }
+	@Override public void exitNonVoidType(MiniJParser.NonVoidTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlock(MiniJParser.BlockContext ctx) { }
+	@Override public void enterFunctionBlock(MiniJParser.FunctionBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlock(MiniJParser.BlockContext ctx) { }
+	@Override public void exitFunctionBlock(MiniJParser.FunctionBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatement(MiniJParser.StatementContext ctx) { }
+	@Override public void enterBlockNV(MiniJParser.BlockNVContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatement(MiniJParser.StatementContext ctx) { }
+	@Override public void exitBlockNV(MiniJParser.BlockNVContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatementNV(MiniJParser.StatementNVContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementNV(MiniJParser.StatementNVContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLocation(MiniJParser.LocationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLocation(MiniJParser.LocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -121,6 +167,30 @@ public class MiniJBaseListener implements MiniJListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssignStatement(MiniJParser.AssignStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallStatement(MiniJParser.CallStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallStatement(MiniJParser.CallStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArgList(MiniJParser.ArgListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArgList(MiniJParser.ArgListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

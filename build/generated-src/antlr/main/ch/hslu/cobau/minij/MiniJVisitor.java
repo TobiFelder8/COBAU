@@ -1,7 +1,5 @@
 // Generated from ch/hslu/cobau/minij/MiniJ.g4 by ANTLR 4.8
-
-package ch.hslu.cobau.minij;
-
+ package ch.hslu.cobau.minij; 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -19,11 +17,23 @@ public interface MiniJVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnit(MiniJParser.UnitContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiniJParser#recordDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRecordDeclaration(MiniJParser.RecordDeclarationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiniJParser#functionDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunctionDeclaration(MiniJParser.FunctionDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#returnType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnType(MiniJParser.ReturnTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiniJParser#paramList}.
 	 * @param ctx the parse tree
@@ -43,29 +53,53 @@ public interface MiniJVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarDeclaration(MiniJParser.VarDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiniJParser#type}.
+	 * Visit a parse tree produced by {@link MiniJParser#nonVoidType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitType(MiniJParser.TypeContext ctx);
+	T visitNonVoidType(MiniJParser.NonVoidTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiniJParser#block}.
+	 * Visit a parse tree produced by {@link MiniJParser#functionBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBlock(MiniJParser.BlockContext ctx);
+	T visitFunctionBlock(MiniJParser.FunctionBlockContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiniJParser#statement}.
+	 * Visit a parse tree produced by {@link MiniJParser#blockNV}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatement(MiniJParser.StatementContext ctx);
+	T visitBlockNV(MiniJParser.BlockNVContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#statementNV}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementNV(MiniJParser.StatementNVContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#location}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocation(MiniJParser.LocationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiniJParser#assignStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAssignStatement(MiniJParser.AssignStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#callStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallStatement(MiniJParser.CallStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiniJParser#argList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArgList(MiniJParser.ArgListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiniJParser#expr}.
 	 * @param ctx the parse tree

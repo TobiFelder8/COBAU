@@ -1,7 +1,5 @@
 // Generated from ch/hslu/cobau/minij/MiniJ.g4 by ANTLR 4.8
-
-package ch.hslu.cobau.minij;
-
+ package ch.hslu.cobau.minij; 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -20,6 +18,16 @@ public interface MiniJListener extends ParseTreeListener {
 	 */
 	void exitUnit(MiniJParser.UnitContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiniJParser#recordDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterRecordDeclaration(MiniJParser.RecordDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#recordDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitRecordDeclaration(MiniJParser.RecordDeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiniJParser#functionDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -29,6 +37,16 @@ public interface MiniJListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionDeclaration(MiniJParser.FunctionDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#returnType}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnType(MiniJParser.ReturnTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#returnType}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnType(MiniJParser.ReturnTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiniJParser#paramList}.
 	 * @param ctx the parse tree
@@ -60,35 +78,55 @@ public interface MiniJListener extends ParseTreeListener {
 	 */
 	void exitVarDeclaration(MiniJParser.VarDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#type}.
+	 * Enter a parse tree produced by {@link MiniJParser#nonVoidType}.
 	 * @param ctx the parse tree
 	 */
-	void enterType(MiniJParser.TypeContext ctx);
+	void enterNonVoidType(MiniJParser.NonVoidTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#type}.
+	 * Exit a parse tree produced by {@link MiniJParser#nonVoidType}.
 	 * @param ctx the parse tree
 	 */
-	void exitType(MiniJParser.TypeContext ctx);
+	void exitNonVoidType(MiniJParser.NonVoidTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#block}.
+	 * Enter a parse tree produced by {@link MiniJParser#functionBlock}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlock(MiniJParser.BlockContext ctx);
+	void enterFunctionBlock(MiniJParser.FunctionBlockContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#block}.
+	 * Exit a parse tree produced by {@link MiniJParser#functionBlock}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlock(MiniJParser.BlockContext ctx);
+	void exitFunctionBlock(MiniJParser.FunctionBlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#statement}.
+	 * Enter a parse tree produced by {@link MiniJParser#blockNV}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatement(MiniJParser.StatementContext ctx);
+	void enterBlockNV(MiniJParser.BlockNVContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#statement}.
+	 * Exit a parse tree produced by {@link MiniJParser#blockNV}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatement(MiniJParser.StatementContext ctx);
+	void exitBlockNV(MiniJParser.BlockNVContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#statementNV}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementNV(MiniJParser.StatementNVContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#statementNV}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementNV(MiniJParser.StatementNVContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#location}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocation(MiniJParser.LocationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#location}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocation(MiniJParser.LocationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiniJParser#assignStatement}.
 	 * @param ctx the parse tree
@@ -99,6 +137,26 @@ public interface MiniJListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignStatement(MiniJParser.AssignStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#callStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallStatement(MiniJParser.CallStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#callStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallStatement(MiniJParser.CallStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#argList}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgList(MiniJParser.ArgListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#argList}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgList(MiniJParser.ArgListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiniJParser#expr}.
 	 * @param ctx the parse tree

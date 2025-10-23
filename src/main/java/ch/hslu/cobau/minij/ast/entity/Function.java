@@ -18,22 +18,22 @@ public class Function extends Block {
 	private final Type returnType;
     private final List<Declaration> formalParameters;
 
-    public Function(String identifier, Type returnType, List<Declaration> formalParameters, List<Statement> statements) {
+    public Function(String ident, Type returnType, List<Declaration> formalParams, List<Statement> statements) {
         super(statements);
-        Objects.requireNonNull(identifier);
+        Objects.requireNonNull(ident);
         Objects.requireNonNull(returnType);
-        Objects.requireNonNull(formalParameters);
+        Objects.requireNonNull(formalParams);
 
-        this.identifier = identifier;
+        this.identifier = ident;
         this.returnType = returnType;
-        this.formalParameters = formalParameters;
+        this.formalParameters = formalParams;
     }
 
     public String getIdentifier() {
         return identifier;
     }
 
-    public Type getReturnType() {
+    public Type getType() {
         return returnType;
     }
 

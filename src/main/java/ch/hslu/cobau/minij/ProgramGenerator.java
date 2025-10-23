@@ -44,6 +44,20 @@ public class ProgramGenerator extends BaseAstVisitor {
     }
 
     @Override
+    public void visit(CallStatement callStatement) {
+        callStatement.visitChildren(this);
+
+        // Visit each parameter and prepare it for function call
+        var parameters = callStatement.getCallExpression().getParameters();
+        for (int i = 0; i < parameters.size(); i++) {
+            parameters.get(i).accept(this);
+            statementsStack.push("   mov " + PARAMETER_REGISTERS_SORTED.get(i) + ", rax"); // Move to parameter register
+        }
+
+        statementsStack.push("   call " + callStatement.getCallExpression().getIdentifier());
+    }
+
+    @Override
     public void visit(Unit program) {
         program.visitChildren(this);
 
@@ -80,30 +94,9 @@ public class ProgramGenerator extends BaseAstVisitor {
     }
 
     @Override
-    public void visit(CallStatement callStatement) {
-        callStatement.visitChildren(this);
-
-        // Visit each parameter and prepare it for function call
-        var parameters = callStatement.getCallExpression().getParameters();
-        for (int i = 0; i < parameters.size(); i++) {
-            parameters.get(i).accept(this);
-            statementsStack.push("   mov " + PARAMETER_REGISTERS_SORTED.get(i) + ", rax"); // Move to parameter register
-        }
-
-        statementsStack.push("   call " + callStatement.getCallExpression().getIdentifier());
-    }
-
-    @Override
     public void visit(Declaration declaration) {
         declaration.visitChildren(this);
         addLocal(declaration.getIdentifier());
-    }
-
-    @Override
-    public void visit(VariableAccess variable) {
-        super.visit(variable);
-        int position = localsMap.get(variable.getIdentifier());
-        statementsStack.push("   mov rax, [rbp-" + position + "]"); // Load variable value to rax
     }
 
     @Override
@@ -119,26 +112,18 @@ public class ProgramGenerator extends BaseAstVisitor {
     }
 
     @Override
+    public void visit(VariableAccess variable) {
+        super.visit(variable);
+        int position = localsMap.get(variable.getIdentifier());
+        statementsStack.push("   mov rax, [rbp-" + position + "]"); // Load variable value to rax
+    }
+
+
+    @Override
     public void visit(IntegerConstant integerConstant) {
         integerConstant.visitChildren(this);
 
         statementsStack.push("   mov rax, " + integerConstant.getValue()); // Handle constant values
-    }
-
-    @Override
-    public void visit(TrueConstant trueConstant) {
-        trueConstant.visitChildren(this);
-
-        // True maps to 1
-        statementsStack.push("   mov rax, 1");
-    }
-
-    @Override
-    public void visit(FalseConstant falseConstant) {
-        falseConstant.visitChildren(this);
-
-        // False maps to 0
-        statementsStack.push("   mov rax, 0");
     }
 
     @Override
@@ -155,6 +140,22 @@ public class ProgramGenerator extends BaseAstVisitor {
             statementsStack.push("   sete al"); // Set rax to 1 if equal
         }
     }
+    @Override
+    public void visit(TrueConstant trueConstant) {
+        trueConstant.visitChildren(this);
+
+        // True maps to 1
+        statementsStack.push("   mov rax, 1");
+    }
+
+    @Override
+    public void visit(FalseConstant falseConstant) {
+        falseConstant.visitChildren(this);
+
+        // False maps to 0
+        statementsStack.push("   mov rax, 0");
+    }
+
 
     @Override
     public void visit(IfStatement ifStatement) {

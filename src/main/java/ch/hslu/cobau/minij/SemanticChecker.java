@@ -38,7 +38,7 @@ public class SemanticChecker {
                 .map(Struct::getDeclarations)
                 .flatMap(List::stream)
                 .toList();
-        final var allFunctionDeclarations = MiniJCompiler.getAllFunctions(unit).stream()
+        final var allFunctionDeclarations = MiniJCompiler.getAllFuncts(unit).stream()
                 .map(SemanticChecker::getAllDeclarationsForFunction)
                 .flatMap(List::stream)
                 .toList();
@@ -76,26 +76,6 @@ public class SemanticChecker {
         returnedDeclarations.addAll(functionTopLevelDeclarations);
         returnedDeclarations.addAll(blockDeclarations);
         return returnedDeclarations;
-    }
-
-    private static <T extends Statement> List<T> getStatementsByType(Block block, Class<T> searchedType) {
-        List<T> foundStatements = new ArrayList<>();
-
-        final var blocks = block.getStatements().stream()
-                .filter(Block.class::isInstance)
-                .map(Block.class::cast)
-                .toList();
-
-        for (Block subblock : blocks) {
-            foundStatements.addAll(getStatementsByType(subblock, searchedType));
-        }
-
-        final List<T> declarationsOfCurrentBlock = block.getStatements().stream()
-                .filter(searchedType::isInstance)
-                .map(searchedType::cast)
-                .toList();
-        foundStatements.addAll(declarationsOfCurrentBlock);
-        return foundStatements;
     }
 
     static List<AssignmentStatement> getAllAssignmentStatementsForFunction(Function function) {
@@ -138,6 +118,25 @@ public class SemanticChecker {
         return returnedAssignments;
     }
 
+    private static <T extends Statement> List<T> getStatementsByType(Block block, Class<T> searchedType) {
+        List<T> foundStatements = new ArrayList<>();
+
+        final var blocks = block.getStatements().stream()
+                .filter(Block.class::isInstance)
+                .map(Block.class::cast)
+                .toList();
+
+        for (Block subblock : blocks) {
+            foundStatements.addAll(getStatementsByType(subblock, searchedType));
+        }
+
+        final List<T> declarationsOfCurrentBlock = block.getStatements().stream()
+                .filter(searchedType::isInstance)
+                .map(searchedType::cast)
+                .toList();
+        foundStatements.addAll(declarationsOfCurrentBlock);
+        return foundStatements;
+    }
     static List<IfStatement> getAllIfStatementsForFunction(Function function) {
         final List<IfStatement> functionTopLevelAssignments = function.getStatements().stream()
                 .filter(IfStatement.class::isInstance)
@@ -185,7 +184,7 @@ public class SemanticChecker {
     }
 
     static Optional<Function> getFunctionByIdentifier(Unit unit, String identifier) {
-        return MiniJCompiler.getAllFunctions(unit).stream()
+        return MiniJCompiler.getAllFuncts(unit).stream()
                 .filter(s -> s.getIdentifier().equals(identifier))
                 .findFirst();
     }
@@ -208,6 +207,16 @@ public class SemanticChecker {
                 .toList();
     }
 
+    private static Optional<Type> getConstantType(Expression expression) {
+        return switch (expression) {
+            case FalseConstant f -> Optional.of(new BooleanType());
+            case TrueConstant t -> Optional.of(new BooleanType());
+            case StringConstant s -> Optional.of(new StringType());
+            case IntegerConstant i -> Optional.of(new IntegerType());
+            default -> Optional.empty();
+        };
+    }
+
     static Optional<Type> getBaseTypeForExpression(Expression expression, Function function, Unit unit) {
         if (expression instanceof MemoryAccess) {
             return SemanticChecker.getBaseTypeForMemoryAccessExpression(expression, function, unit);
@@ -222,24 +231,16 @@ public class SemanticChecker {
             }
             return Optional.empty();
         } else if (expression instanceof CallExpression callExpression) {
-            return MiniJCompiler.getAllFunctions(unit).stream()
+            return MiniJCompiler.getAllFuncts(unit).stream()
                     .filter(f -> f.getIdentifier().equals(callExpression.getIdentifier()))
-                    .map(Function::getReturnType)
+                    .map(Function::getType)
                     .findFirst();
         } else {
             return getConstantType(expression);
         }
     }
 
-    private static Optional<Type> getConstantType(Expression expression) {
-        return switch (expression) {
-            case FalseConstant f -> Optional.of(new BooleanType());
-            case TrueConstant t -> Optional.of(new BooleanType());
-            case StringConstant s -> Optional.of(new StringType());
-            case IntegerConstant i -> Optional.of(new IntegerType());
-            default -> Optional.empty();
-        };
-    }
+
 
     static Optional<Type> getBaseTypeForMemoryAccessExpression(Expression expression, Function function, Unit unit) {
         if (expression instanceof FieldAccess fieldAccess) {
@@ -296,6 +297,12 @@ public class SemanticChecker {
 
         return Optional.empty();
     }
+    private static Optional<Type> getBaseTypeForUnaryExpression(UnaryExpression expression) {
+        if (expression.getUnaryOperator().equals(UnaryOperator.NOT)) {
+            return Optional.of(new BooleanType());
+        }
+        return Optional.of(new IntegerType());
+    }
 
     private static List<Type> getAllowedTypesForBinaryExpression(BinaryExpression expression) {
         // Operator type always defines the return value type
@@ -323,13 +330,19 @@ public class SemanticChecker {
 
         return List.of();
     }
+    private static boolean doOperatorTypesMatchForUnaryExpression(UnaryExpression expression, Function function, Unit unit) {
+        // Operator type always defines the return value type
+        final Optional<Type> expectedType = getBaseTypeForUnaryExpression(expression);
+        final Optional<Type> expressionType = getBaseTypeForExpression(expression.getExpression(), function, unit);
 
-    private static Optional<Type> getBaseTypeForUnaryExpression(UnaryExpression expression) {
-        if (expression.getUnaryOperator().equals(UnaryOperator.NOT)) {
-            return Optional.of(new BooleanType());
+        if (expectedType.isPresent() && expressionType.isPresent()) {
+            return expectedType.equals(expressionType);
         }
-        return Optional.of(new IntegerType());
+
+        return false;
     }
+
+
 
     private static boolean doOperatorTypesMatchForBinaryExpression(BinaryExpression expression, Function function, Unit unit) {
         // Operator type always defines the return value type
@@ -345,15 +358,5 @@ public class SemanticChecker {
         return false;
     }
 
-    private static boolean doOperatorTypesMatchForUnaryExpression(UnaryExpression expression, Function function, Unit unit) {
-        // Operator type always defines the return value type
-        final Optional<Type> expectedType = getBaseTypeForUnaryExpression(expression);
-        final Optional<Type> expressionType = getBaseTypeForExpression(expression.getExpression(), function, unit);
 
-        if (expectedType.isPresent() && expressionType.isPresent()) {
-            return expectedType.equals(expressionType);
-        }
-
-        return false;
-    }
 }

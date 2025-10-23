@@ -23,7 +23,7 @@ import static java.util.function.Predicate.not;
 
 public class MiniJCompiler {
 
-    static List<Function> getAllFunctions(Unit unit) {
+    static List<Function> getAllFuncts(Unit unit) {
         return Stream.concat(unit.getFunctions().stream(), BUILT_IN_FUNCTIONS.stream()).toList();
     }
 
@@ -119,13 +119,13 @@ public class MiniJCompiler {
         });
 
         // Check duplicate function identifiers
-        final var functionIdentifiers = getAllFunctions(unit).stream().map(Function::getIdentifier).toList();
+        final var functionIdentifiers = getAllFuncts(unit).stream().map(Function::getIdentifier).toList();
         if (SemanticChecker.hasDuplicates(functionIdentifiers)) {
             errorListener.semanticError("Duplicate function identifiers found");
         }
 
         // Check duplicate variable identifiers in context
-        for (var function : getAllFunctions(unit)) {
+        for (var function : getAllFuncts(unit)) {
             final List<String> functionDeclarations = SemanticChecker.getAllDeclarationsForFunction(function).stream()
                     .map(Declaration::getIdentifier)
                     .toList();
@@ -142,7 +142,7 @@ public class MiniJCompiler {
                 .ifPresent(declaration -> errorListener.semanticError(String.format("Incorrect void declaration found. Identifier: '%s' Type: '%s'", declaration.getIdentifier(), declaration.getType())));
 
         // Check for existence identifiers for variable assignment
-        for (Function function : getAllFunctions(unit)) {
+        for (Function function : getAllFuncts(unit)) {
             final List<String> variableAccessIdentifiers = function.getStatements().stream()
                     .filter(AssignmentStatement.class::isInstance)
                     .map(AssignmentStatement.class::cast)
@@ -177,7 +177,7 @@ public class MiniJCompiler {
 
         // STRUCT: check for nonexistent field access
         // TODO: Das ist irgendwie noch nicht komplett. Ist mega kompliziert um den Struct Type zu finden, wenn es verkettete Operationen sind (z.B. lesen von Struct aus Array, dann access darauf)
-        for (Function function : getAllFunctions(unit)) {
+        for (Function function : getAllFuncts(unit)) {
             final List<AssignmentStatement> assignments = SemanticChecker.getAllAssignmentStatementsForFunction(function);
             var leftSides = assignments.stream()
                     .map(AssignmentStatement::getLeft)
@@ -222,7 +222,7 @@ public class MiniJCompiler {
         }
 
         // FUNCTION: Check that function does exist
-        for (Function function : getAllFunctions(unit)) {
+        for (Function function : getAllFuncts(unit)) {
             final var allCallStatements = SemanticChecker.getAllCallStatementsForFunction(function);
             final var allCallIdentifiers = allCallStatements.stream().map(CallStatement::getCallExpression)
                     .map(CallExpression::getIdentifier)
@@ -235,7 +235,7 @@ public class MiniJCompiler {
 
         // Expressions with wrong types
         // This checks if the left hand site type and the right hand site type match
-        for (Function function : getAllFunctions(unit)) {
+        for (Function function : getAllFuncts(unit)) {
             final var assignments = SemanticChecker.getAllAssignmentStatementsForFunction(function);
 
             for (AssignmentStatement assignment : assignments) {
@@ -254,7 +254,7 @@ public class MiniJCompiler {
         }
 
         // Function argument amount
-        for (Function function : getAllFunctions(unit)) {
+        for (Function function : getAllFuncts(unit)) {
             final var allCallExpressions = SemanticChecker.getAllCallStatementsForFunction(function).stream()
                     .map(CallStatement::getCallExpression)
                     .toList();
@@ -292,8 +292,8 @@ public class MiniJCompiler {
         }
 
         // Function must have correct return type
-        for (Function function : getAllFunctions(unit)) {
-            final var expectedReturnType = function.getReturnType();
+        for (Function function : getAllFuncts(unit)) {
+            final var expectedReturnType = function.getType();
             if (expectedReturnType instanceof VoidType) {
                 final var returnStatements = function.getStatements().stream()
                         .filter(ReturnStatement.class::isInstance)
@@ -333,7 +333,7 @@ public class MiniJCompiler {
         }
 
         // MAIN-FUNCTION: must have no parameters
-        final Optional<Function> main = getAllFunctions(unit).stream()
+        final Optional<Function> main = getAllFuncts(unit).stream()
                 .filter(f -> f.getIdentifier().equals("main"))
                 .findFirst();
         if (main.isPresent() && !main.get().getFormalParameters().isEmpty()) {
@@ -341,7 +341,7 @@ public class MiniJCompiler {
         }
 
         // Check if statements for correct expression types
-        for (Function function : getAllFunctions(unit)) {
+        for (Function function : getAllFuncts(unit)) {
             final var ifStatements = SemanticChecker.getAllIfStatementsForFunction(function);
             final Optional<Type> ifStatementsWithoutBooleanExpression = ifStatements.stream()
                     .map(IfStatement::getExpression)
@@ -356,7 +356,7 @@ public class MiniJCompiler {
         }
 
         // Check while statements for correct expression types
-        for (Function function : getAllFunctions(unit)) {
+        for (Function function : getAllFuncts(unit)) {
             final var whileStatements = SemanticChecker.getAllWhileStatementsForFunction(function);
             final Optional<Type> whileStatementsWithoutBooleanExpression = whileStatements.stream()
                     .map(WhileStatement::getExpression)

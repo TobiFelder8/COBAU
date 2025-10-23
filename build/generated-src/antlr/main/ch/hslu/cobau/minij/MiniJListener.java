@@ -1,5 +1,7 @@
 // Generated from ch/hslu/cobau/minij/MiniJ.g4 by ANTLR 4.8
- package ch.hslu.cobau.minij; 
+
+package ch.hslu.cobau.minij;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -18,125 +20,105 @@ public interface MiniJListener extends ParseTreeListener {
 	 */
 	void exitUnit(MiniJParser.UnitContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#recordDeclaration}.
+	 * Enter a parse tree produced by {@link MiniJParser#member}.
 	 * @param ctx the parse tree
 	 */
-	void enterRecordDeclaration(MiniJParser.RecordDeclarationContext ctx);
+	void enterMember(MiniJParser.MemberContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#recordDeclaration}.
+	 * Exit a parse tree produced by {@link MiniJParser#member}.
 	 * @param ctx the parse tree
 	 */
-	void exitRecordDeclaration(MiniJParser.RecordDeclarationContext ctx);
+	void exitMember(MiniJParser.MemberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#functionDeclaration}.
+	 * Enter a parse tree produced by {@link MiniJParser#struct}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionDeclaration(MiniJParser.FunctionDeclarationContext ctx);
+	void enterStruct(MiniJParser.StructContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#functionDeclaration}.
+	 * Exit a parse tree produced by {@link MiniJParser#struct}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionDeclaration(MiniJParser.FunctionDeclarationContext ctx);
+	void exitStruct(MiniJParser.StructContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#returnType}.
+	 * Enter a parse tree produced by {@link MiniJParser#function}.
 	 * @param ctx the parse tree
 	 */
-	void enterReturnType(MiniJParser.ReturnTypeContext ctx);
+	void enterFunction(MiniJParser.FunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#returnType}.
+	 * Exit a parse tree produced by {@link MiniJParser#function}.
 	 * @param ctx the parse tree
 	 */
-	void exitReturnType(MiniJParser.ReturnTypeContext ctx);
+	void exitFunction(MiniJParser.FunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#paramList}.
+	 * Enter a parse tree produced by {@link MiniJParser#parameter}.
 	 * @param ctx the parse tree
 	 */
-	void enterParamList(MiniJParser.ParamListContext ctx);
+	void enterParameter(MiniJParser.ParameterContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#paramList}.
+	 * Exit a parse tree produced by {@link MiniJParser#parameter}.
 	 * @param ctx the parse tree
 	 */
-	void exitParamList(MiniJParser.ParamListContext ctx);
+	void exitParameter(MiniJParser.ParameterContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#param}.
+	 * Enter a parse tree produced by {@link MiniJParser#declarations}.
 	 * @param ctx the parse tree
 	 */
-	void enterParam(MiniJParser.ParamContext ctx);
+	void enterDeclarations(MiniJParser.DeclarationsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#param}.
+	 * Exit a parse tree produced by {@link MiniJParser#declarations}.
 	 * @param ctx the parse tree
 	 */
-	void exitParam(MiniJParser.ParamContext ctx);
+	void exitDeclarations(MiniJParser.DeclarationsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#varDeclaration}.
+	 * Enter a parse tree produced by {@link MiniJParser#functionBody}.
 	 * @param ctx the parse tree
 	 */
-	void enterVarDeclaration(MiniJParser.VarDeclarationContext ctx);
+	void enterFunctionBody(MiniJParser.FunctionBodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#varDeclaration}.
+	 * Exit a parse tree produced by {@link MiniJParser#functionBody}.
 	 * @param ctx the parse tree
 	 */
-	void exitVarDeclaration(MiniJParser.VarDeclarationContext ctx);
+	void exitFunctionBody(MiniJParser.FunctionBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#nonVoidType}.
+	 * Enter a parse tree produced by {@link MiniJParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void enterNonVoidType(MiniJParser.NonVoidTypeContext ctx);
+	void enterBlock(MiniJParser.BlockContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#nonVoidType}.
+	 * Exit a parse tree produced by {@link MiniJParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void exitNonVoidType(MiniJParser.NonVoidTypeContext ctx);
+	void exitBlock(MiniJParser.BlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#functionBlock}.
+	 * Enter a parse tree produced by {@link MiniJParser#declarationStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionBlock(MiniJParser.FunctionBlockContext ctx);
+	void enterDeclarationStatement(MiniJParser.DeclarationStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#functionBlock}.
+	 * Exit a parse tree produced by {@link MiniJParser#declarationStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionBlock(MiniJParser.FunctionBlockContext ctx);
+	void exitDeclarationStatement(MiniJParser.DeclarationStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#blockNV}.
+	 * Enter a parse tree produced by {@link MiniJParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlockNV(MiniJParser.BlockNVContext ctx);
+	void enterStatement(MiniJParser.StatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#blockNV}.
+	 * Exit a parse tree produced by {@link MiniJParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlockNV(MiniJParser.BlockNVContext ctx);
+	void exitStatement(MiniJParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#statementNV}.
+	 * Enter a parse tree produced by {@link MiniJParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatementNV(MiniJParser.StatementNVContext ctx);
+	void enterAssignment(MiniJParser.AssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#statementNV}.
+	 * Exit a parse tree produced by {@link MiniJParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatementNV(MiniJParser.StatementNVContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniJParser#location}.
-	 * @param ctx the parse tree
-	 */
-	void enterLocation(MiniJParser.LocationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniJParser#location}.
-	 * @param ctx the parse tree
-	 */
-	void exitLocation(MiniJParser.LocationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniJParser#assignStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignStatement(MiniJParser.AssignStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniJParser#assignStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignStatement(MiniJParser.AssignStatementContext ctx);
+	void exitAssignment(MiniJParser.AssignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiniJParser#callStatement}.
 	 * @param ctx the parse tree
@@ -148,113 +130,203 @@ public interface MiniJListener extends ParseTreeListener {
 	 */
 	void exitCallStatement(MiniJParser.CallStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#argList}.
+	 * Enter a parse tree produced by {@link MiniJParser#whileStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterArgList(MiniJParser.ArgListContext ctx);
+	void enterWhileStatement(MiniJParser.WhileStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#argList}.
+	 * Exit a parse tree produced by {@link MiniJParser#whileStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitArgList(MiniJParser.ArgListContext ctx);
+	void exitWhileStatement(MiniJParser.WhileStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#expr}.
+	 * Enter a parse tree produced by {@link MiniJParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(MiniJParser.ExprContext ctx);
+	void enterIfStatement(MiniJParser.IfStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#expr}.
+	 * Exit a parse tree produced by {@link MiniJParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(MiniJParser.ExprContext ctx);
+	void exitIfStatement(MiniJParser.IfStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#orExpr}.
+	 * Enter a parse tree produced by {@link MiniJParser#elseClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterOrExpr(MiniJParser.OrExprContext ctx);
+	void enterElseClause(MiniJParser.ElseClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#orExpr}.
+	 * Exit a parse tree produced by {@link MiniJParser#elseClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitOrExpr(MiniJParser.OrExprContext ctx);
+	void exitElseClause(MiniJParser.ElseClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#andExpr}.
+	 * Enter a parse tree produced by {@link MiniJParser#returnStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAndExpr(MiniJParser.AndExprContext ctx);
+	void enterReturnStatement(MiniJParser.ReturnStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#andExpr}.
+	 * Exit a parse tree produced by {@link MiniJParser#returnStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAndExpr(MiniJParser.AndExprContext ctx);
+	void exitReturnStatement(MiniJParser.ReturnStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#equality}.
+	 * Enter a parse tree produced by {@link MiniJParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterEquality(MiniJParser.EqualityContext ctx);
+	void enterExpression(MiniJParser.ExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#equality}.
+	 * Exit a parse tree produced by {@link MiniJParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitEquality(MiniJParser.EqualityContext ctx);
+	void exitExpression(MiniJParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#relational}.
+	 * Enter a parse tree produced by {@link MiniJParser#call}.
 	 * @param ctx the parse tree
 	 */
-	void enterRelational(MiniJParser.RelationalContext ctx);
+	void enterCall(MiniJParser.CallContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#relational}.
+	 * Exit a parse tree produced by {@link MiniJParser#call}.
 	 * @param ctx the parse tree
 	 */
-	void exitRelational(MiniJParser.RelationalContext ctx);
+	void exitCall(MiniJParser.CallContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#additive}.
+	 * Enter a parse tree produced by {@link MiniJParser#unaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterAdditive(MiniJParser.AdditiveContext ctx);
+	void enterUnaryExpression(MiniJParser.UnaryExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#additive}.
+	 * Exit a parse tree produced by {@link MiniJParser#unaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitAdditive(MiniJParser.AdditiveContext ctx);
+	void exitUnaryExpression(MiniJParser.UnaryExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#multiplicative}.
+	 * Enter a parse tree produced by {@link MiniJParser#trueConstant}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultiplicative(MiniJParser.MultiplicativeContext ctx);
+	void enterTrueConstant(MiniJParser.TrueConstantContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#multiplicative}.
+	 * Exit a parse tree produced by {@link MiniJParser#trueConstant}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultiplicative(MiniJParser.MultiplicativeContext ctx);
+	void exitTrueConstant(MiniJParser.TrueConstantContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#prefix}.
+	 * Enter a parse tree produced by {@link MiniJParser#falseConstant}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrefix(MiniJParser.PrefixContext ctx);
+	void enterFalseConstant(MiniJParser.FalseConstantContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#prefix}.
+	 * Exit a parse tree produced by {@link MiniJParser#falseConstant}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrefix(MiniJParser.PrefixContext ctx);
+	void exitFalseConstant(MiniJParser.FalseConstantContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#postfix}.
+	 * Enter a parse tree produced by {@link MiniJParser#integerConstant}.
 	 * @param ctx the parse tree
 	 */
-	void enterPostfix(MiniJParser.PostfixContext ctx);
+	void enterIntegerConstant(MiniJParser.IntegerConstantContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#postfix}.
+	 * Exit a parse tree produced by {@link MiniJParser#integerConstant}.
 	 * @param ctx the parse tree
 	 */
-	void exitPostfix(MiniJParser.PostfixContext ctx);
+	void exitIntegerConstant(MiniJParser.IntegerConstantContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniJParser#primary}.
+	 * Enter a parse tree produced by {@link MiniJParser#stringConstant}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrimary(MiniJParser.PrimaryContext ctx);
+	void enterStringConstant(MiniJParser.StringConstantContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniJParser#primary}.
+	 * Exit a parse tree produced by {@link MiniJParser#stringConstant}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrimary(MiniJParser.PrimaryContext ctx);
+	void exitStringConstant(MiniJParser.StringConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#memoryAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterMemoryAccess(MiniJParser.MemoryAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#memoryAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitMemoryAccess(MiniJParser.MemoryAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaration(MiniJParser.DeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaration(MiniJParser.DeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterType(MiniJParser.TypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitType(MiniJParser.TypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#basicType}.
+	 * @param ctx the parse tree
+	 */
+	void enterBasicType(MiniJParser.BasicTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#basicType}.
+	 * @param ctx the parse tree
+	 */
+	void exitBasicType(MiniJParser.BasicTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#integerType}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntegerType(MiniJParser.IntegerTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#integerType}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntegerType(MiniJParser.IntegerTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#stringType}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringType(MiniJParser.StringTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#stringType}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringType(MiniJParser.StringTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#booleanType}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanType(MiniJParser.BooleanTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#booleanType}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanType(MiniJParser.BooleanTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#structType}.
+	 * @param ctx the parse tree
+	 */
+	void enterStructType(MiniJParser.StructTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#structType}.
+	 * @param ctx the parse tree
+	 */
+	void exitStructType(MiniJParser.StructTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniJParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(MiniJParser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniJParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(MiniJParser.IdentifierContext ctx);
 }

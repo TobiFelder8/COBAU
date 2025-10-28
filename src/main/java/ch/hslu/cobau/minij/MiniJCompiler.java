@@ -101,27 +101,27 @@ public class MiniJCompiler {
         // Check duplicate global identifiers
         final var globalIdentifiers = unit.getGlobals().stream().map(Declaration::getIdentifier).toList();
         if (SemanticChecker.hasDuplicates(globalIdentifiers)) {
-            errorListener.semanticError("Duplicate global variable identifiers found");
+            errorListener.semanticError("Duplikate bei den Globalen identifiers");
         }
 
         // Check duplicate struct identifiers
         final var structIdentifiers = unit.getStructs().stream().map(Struct::getIdentifier).toList();
         if (SemanticChecker.hasDuplicates(structIdentifiers)) {
-            errorListener.semanticError("Duplicate struct identifiers found");
+            errorListener.semanticError("Duplikate in den struct identifiers");
         }
 
         // Check duplicate identifiers inside of struct
         final var structDeclarationIdentifiers = unit.getStructs().stream().map(s -> s.getDeclarations().stream().map(Declaration::getIdentifier).toList()).toList();
         structDeclarationIdentifiers.forEach(i -> {
             if (SemanticChecker.hasDuplicates(i)) {
-                errorListener.semanticError("Duplicate identifiers inside of struct found");
+                errorListener.semanticError("Duplizierte identifiers in einem Struct");
             }
         });
 
         // Check duplicate function identifiers
         final var functionIdentifiers = getAllFuncts(unit).stream().map(Function::getIdentifier).toList();
         if (SemanticChecker.hasDuplicates(functionIdentifiers)) {
-            errorListener.semanticError("Duplicate function identifiers found");
+            errorListener.semanticError("Duplizierte Funktions-Identifiers!");
         }
 
         // Check duplicate variable identifiers in context
@@ -131,7 +131,7 @@ public class MiniJCompiler {
                     .toList();
 
             if (SemanticChecker.hasDuplicates(functionDeclarations)) {
-                errorListener.semanticError("Duplicate identifiers found");
+                errorListener.semanticError("Duplizierte identifiers!");
             }
         }
 
@@ -139,7 +139,7 @@ public class MiniJCompiler {
         SemanticChecker.getAllDeclarations(unit).stream()
                 .filter(SemanticChecker::isVoidDeclaration)
                 .findAny()
-                .ifPresent(declaration -> errorListener.semanticError(String.format("Incorrect void declaration found. Identifier: '%s' Type: '%s'", declaration.getIdentifier(), declaration.getType())));
+                .ifPresent(declaration -> errorListener.semanticError(String.format("Inkorrekte void declaration... Identifier: '%s' Type: '%s'", declaration.getIdentifier(), declaration.getType())));
 
         // Check for existence identifiers for variable assignment
         for (Function function : getAllFuncts(unit)) {
@@ -160,7 +160,7 @@ public class MiniJCompiler {
                     .filter(not(globalIdentifiers::contains))
                     .filter(not(functionDeclarations::contains))
                     .findAny()
-                    .ifPresent(identifier -> errorListener.semanticError(String.format("Variable access without declaration found. Identifier: '%s'", identifier)));
+                    .ifPresent(identifier -> errorListener.semanticError(String.format("Variable Zugriff ohne declaration Gefunden! Identifier: '%s'", identifier)));
         }
 
         // Check for nonexistent struct types on variable declaration
@@ -173,10 +173,8 @@ public class MiniJCompiler {
         structTypeIdentifiers.stream()
                 .filter(not(structIdentifiers::contains))
                 .findAny()
-                .ifPresent(identifier -> errorListener.semanticError(String.format("Variable declaration with non existent type. Type: '%s'", identifier)));
+                .ifPresent(identifier -> errorListener.semanticError(String.format("Variable Deklaration ohne existierenden Typ erstellt. Type: '%s'", identifier)));
 
-        // STRUCT: check for nonexistent field access
-        // TODO: Das ist irgendwie noch nicht komplett. Ist mega kompliziert um den Struct Type zu finden, wenn es verkettete Operationen sind (z.B. lesen von Struct aus Array, dann access darauf)
         for (Function function : getAllFuncts(unit)) {
             final List<AssignmentStatement> assignments = SemanticChecker.getAllAssignmentStatementsForFunction(function);
             var leftSides = assignments.stream()
@@ -211,10 +209,10 @@ public class MiniJCompiler {
                                 .map(Declaration::getIdentifier)
                                 .toList();
                         if (!identifiers.contains(accessedField)) {
-                            errorListener.semanticError(String.format("Nonexistent Field '%s' is accessed on struct '%s'", accessedField, identifier));
+                            errorListener.semanticError(String.format("Nicht existierendes Feld '%s' hat auf struct '%s' zugegriffen", accessedField, identifier));
                         }
                     } else {
-                        errorListener.semanticError(String.format("Field '%s' is accessed on nonexistent struct type '%s' found", accessedField, identifier));
+                        errorListener.semanticError(String.format("Feld '%s' wurde mittels nichtexistierendem Struct Type '%s' aufgerufen.", accessedField, identifier));
                     }
 
                 }
@@ -230,10 +228,9 @@ public class MiniJCompiler {
             allCallIdentifiers.stream()
                     .filter(not(functionIdentifiers::contains))
                     .findAny()
-                    .ifPresent(identifier -> errorListener.semanticError(String.format("Calling nonexistent function: '%s'", identifier)));
+                    .ifPresent(identifier -> errorListener.semanticError(String.format("Es wurde einen Nonexistence Funktion  function: '%s' aufgerufen ", identifier)));
         }
 
-        // Expressions with wrong types
         // This checks if the left hand site type and the right hand site type match
         for (Function function : getAllFuncts(unit)) {
             final var assignments = SemanticChecker.getAllAssignmentStatementsForFunction(function);
@@ -245,10 +242,10 @@ public class MiniJCompiler {
 
                 if (assignmentTypeLHS.isPresent() && assignmentTypeRHS.isPresent()) {
                     if (!assignmentTypeLHS.get().equals(assignmentTypeRHS.get())) {
-                        errorListener.semanticError("Variable assignment with wrong type");
+                        errorListener.semanticError("Assignment mit falschem type");
                     }
                 } else {
-                    errorListener.semanticError("Variable assignment with wrong type");
+                    errorListener.semanticError("Assignment mit falschem type");
                 }
             }
         }
@@ -274,19 +271,19 @@ public class MiniJCompiler {
                             .toList();
 
                     if (definedParameterTypes.size() != parameterTypes.size()) {
-                        errorListener.semanticError("Function call with wrong number of parameters");
+                        errorListener.semanticError("Function call mit falscher Nummer von Parametern");
                     } else {
                         for (int i = 0; i < definedParameterTypes.size(); i++) {
                             var definedType = definedParameterTypes.get(i);
                             var actualType = parameterTypes.get(i);
                             if (!definedType.equals(actualType)) {
-                                errorListener.semanticError(String.format("Function call with wrong type of parameter Function '%s', Parameter Type '%s'", callExpression.getIdentifier(), definedParameterTypes.get(i)));
+                                errorListener.semanticError(String.format("Function call mit falscher Function '%s', Parameter Type '%s'", callExpression.getIdentifier(), definedParameterTypes.get(i)));
                                 break;
                             }
                         }
                     }
                 } else {
-                    errorListener.semanticError(String.format("Function call with unknown function '%s'", callExpression.getIdentifier()));
+                    errorListener.semanticError(String.format("Function call mit unbekannter Funktion '%s'", callExpression.getIdentifier()));
                 }
             }
         }
@@ -305,7 +302,7 @@ public class MiniJCompiler {
                         .findAny();
 
                 if (returnExpression.isPresent()) {
-                    errorListener.semanticError(String.format("Function '%s' has wrong types in return statement", function.getIdentifier()));
+                    errorListener.semanticError(String.format("Function '%s' hat den falschem type im return statement", function.getIdentifier()));
                 }
             } else {
                 final var returnStatements = function.getStatements().stream()
@@ -327,7 +324,7 @@ public class MiniJCompiler {
                         .findAny();
 
                 if (wrongReturnTypes.isPresent() || voidReturnStatements.isPresent()) {
-                    errorListener.semanticError(String.format("Function '%s' has wrong types in return statement", function.getIdentifier()));
+                    errorListener.semanticError(String.format("Function '%s' falschen Typ in return statement", function.getIdentifier()));
                 }
             }
         }
@@ -337,7 +334,7 @@ public class MiniJCompiler {
                 .filter(f -> f.getIdentifier().equals("main"))
                 .findFirst();
         if (main.isPresent() && !main.get().getFormalParameters().isEmpty()) {
-            errorListener.semanticError("Main function cannot have parameters");
+            errorListener.semanticError("Main function kann keine Parameter haben!");
         }
 
         // Check if statements for correct expression types
@@ -351,7 +348,7 @@ public class MiniJCompiler {
                     .filter(not(BooleanType.class::isInstance))
                     .findAny();
             if (ifStatementsWithoutBooleanExpression.isPresent()) {
-                errorListener.semanticError("If statements must have a boolean expression");
+                errorListener.semanticError("If Statements brauchen eine Boolean Expression");
             }
         }
 
@@ -366,7 +363,7 @@ public class MiniJCompiler {
                     .filter(not(BooleanType.class::isInstance))
                     .findAny();
             if (whileStatementsWithoutBooleanExpression.isPresent()) {
-                errorListener.semanticError("While statements must have a boolean expression");
+                errorListener.semanticError("While statements brauchen eine boolean expression");
             }
         }
 

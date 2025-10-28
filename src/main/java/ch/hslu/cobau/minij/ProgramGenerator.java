@@ -29,13 +29,13 @@ public class ProgramGenerator extends BaseAstVisitor {
 
     private final Map<String, Integer> localsMap = new HashMap<>();
 
-    private int localVarCounter = 0; // Track stack offset for local variables
-    private int labelCounter = 0; // Generate unique labels for jumps
+    private int localVarCounter = 0;
+    private int labelCounter = 0;
 
     private void addLocal(String identifier) {
         if (!localsMap.containsKey(identifier)) {
             localVarCounter++;
-            localsMap.put(identifier, localVarCounter * 8); // Allocate 8 bytes per variable
+            localsMap.put(identifier, localVarCounter * 8);
         }
     }
 
